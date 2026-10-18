@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Prism News API Playground</title>
+<meta name="description" content="Paste your own Prism News API key, pick an endpoint (overview, trends, geography, themes, headlines) and filters, and see the JSON plus a chart. The key is never stored.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧪</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/browser@1.9.2/build/stlite.css">
+<style>
+  :root { --bg: #ffffff; --ink: #31333f; --muted: #6b6a66; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #0e1117; --ink: #fafafa; --muted: #a3a29c; } }
+  :root[data-theme="dark"] { --bg: #0e1117; --ink: #fafafa; --muted: #a3a29c; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Source Sans Pro", system-ui, sans-serif; }
+  #boot { max-width: 760px; margin: 12vh auto 0; padding: 0 16px; }
+  #boot h1 { font-size: 1.8rem; margin: 0 0 .5rem; }
+  #boot p { color: var(--muted); line-height: 1.5; }
+</style>
+</head>
+<body>
+<div id="root">
+  <div id="boot">
+    <h1>🧪 Prism News API Playground</h1>
+    <p>Paste your own Prism News API key, pick an endpoint (overview, trends, geography, themes, headlines) and filters, and see the JSON plus a chart. The key is never stored.</p>
+    <p>Loading the app in your browser (Python via WebAssembly). The first load takes 10 to 30 seconds.</p>
+    <p><a href="https://fliarbi.github.io/news-datasets/">All 60 news datasets</a> ·
+       <a href="https://github.com/fliarbi/prism-news-api">Prism News API</a></p>
+  </div>
+</div>
+<script type="module">
+import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@1.9.2/build/stlite.js";
+const files = ["app.py"];
+const mounted = {};
+for (const f of files) mounted[f] = { url: "./" + f };
+mount({
+  requirements: ["plotly", "requests"],
+  entrypoint: "app.py",
+  files: mounted,
+  streamlitConfig: { "client.toolbarMode": "viewer", "browser.gatherUsageStats": false },
+}, document.getElementById("root"));
+</script>
+</body>
+</html>
